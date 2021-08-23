@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const Weather = () => {
@@ -27,23 +27,23 @@ const Weather = () => {
       });
   };
 
-  const success = position => {
+  const success = useCallback(position => {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
     getWeather(latitude, longitude);
-  };
+  }, []);
 
-  const error = () => {
+  const error = useCallback(() => {
     getWeather('');
-  };
+  }, []);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(success, error);
-  }, []);
+  }, [weather, success, error]);
 
   return (
     <div className="weather">
-      <img className="weather-icon" src={weather.icon} />
+      <img className="weather-icon" src={weather.icon} alt="" />
       <span className="temp">{weather.temp}</span>
       <span className="sky"> {weather.weather}</span>
       <span className="city"> {weather.name}</span>

@@ -30,21 +30,22 @@ a {
   text-decoration: none;
 }
 
-.nav__today:hover {
-  color: white !important;
+.nav__today,
+.nav__month {
+  color: gray;
+  padding: 8px;
 }
 
-.nav__today:focus {
-  color: white !important;
-  outline: transparent;
+.nav__today:hover,
+.nav__today:active,
+.nav__today.active {
+  color: white;
 }
 
-.nav__month:hover {
-  color: white !important;
-}
-
-.nav__month:focus {
-  color: white !important;
+.nav__month:hover,
+.nav__month:active,
+.nav__month.active {
+  color: white;
 }
 
 .icon {

@@ -1,6 +1,6 @@
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const NavBar = props => {
   const clickHandler = () => {
@@ -16,16 +16,20 @@ const NavBar = props => {
           </Navbar.Brand>
         </Link>
         <Nav onClick={clickHandler} className="justify-content-end">
-          <Nav.Link
+          <NavLink
             as={Link}
             to="/todo/today"
             className="nav__today"
-            ref={props.today}>
+            activeClassName="active">
             Today
-          </Nav.Link>
-          <Nav.Link as={Link} to="/todo/month" className="nav__month">
+          </NavLink>
+          <NavLink
+            as={Link}
+            to="/todo/month"
+            className="nav__month"
+            activeClassName="active">
             Month
-          </Nav.Link>
+          </NavLink>
         </Nav>
       </Container>
     </Navbar>
