@@ -1,8 +1,14 @@
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+
 function List() {
+  const notes = useSelector((state: RootState) => state.note.note);
+
   return (
     <ul className="list">
-      <li>새로운 메모1</li>
-      <li>새로운 메모2</li>
+      {notes.map((note, idx) => (
+        <li key={idx}>{note.title}</li>
+      ))}
     </ul>
   );
 }

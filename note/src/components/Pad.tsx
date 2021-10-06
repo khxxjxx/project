@@ -1,5 +1,22 @@
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+
 const Pad: React.FC = props => {
-  return <div className="pad">pad</div>;
+  const notes = useSelector((state: RootState) => state.note.note);
+
+  return (
+    <div className="pad">
+      {notes.map(note => (
+        <div className="note">
+          <div className="top_bar">
+            <div>-</div>
+            <div>x</div>
+          </div>
+          <textarea>{note.text}</textarea>
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default Pad;
