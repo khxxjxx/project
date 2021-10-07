@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type Note = {
+export type noteType = {
   id: string;
   title: string;
   text?: string;
+  coord: { x: number; y: number };
 };
 
 type stateType = {
-  note: Note[];
+  note: noteType[];
 };
 
 const initialState: stateType = {
@@ -23,11 +24,12 @@ export const noteSlice = createSlice({
         id: new Date().toISOString(),
         title: '새로운 노트',
         text: undefined,
+        coord: { x: 50, y: 50 },
       };
 
       state.note.push(newNote);
     },
-    removeNote: (state, action: PayloadAction<Note>) => {
+    removeNote: (state, action: PayloadAction<noteType>) => {
       state.note = state.note.filter(note => note.id !== action.payload.id);
     },
   },

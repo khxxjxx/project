@@ -1,19 +1,14 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
+import NotePad from './NotePad';
 
-const Pad: React.FC = props => {
+const Pad = () => {
   const notes = useSelector((state: RootState) => state.note.note);
 
   return (
     <div className="pad">
-      {notes.map(note => (
-        <div className="note">
-          <div className="top_bar">
-            <div>-</div>
-            <div>x</div>
-          </div>
-          <textarea>{note.text}</textarea>
-        </div>
+      {notes.map((note, idx) => (
+        <NotePad note={note} idx={idx} />
       ))}
     </div>
   );
