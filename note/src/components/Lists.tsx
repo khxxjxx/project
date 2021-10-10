@@ -1,8 +1,10 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { noteActions } from '../store';
+import { RootState } from '../store/store';
 import List from './List';
 
 function Lists() {
+  const notes = useSelector((state: RootState) => state.note.note);
   const dispatch = useDispatch();
 
   const addNote = () => {
@@ -11,7 +13,11 @@ function Lists() {
 
   return (
     <div className="lists">
-      <List />
+      <ul className="list">
+        {notes.map(note => (
+          <List note={note} key={note.id} />
+        ))}
+      </ul>
       <div className="add" onClick={addNote}>
         +
       </div>

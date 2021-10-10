@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { noteType } from '../store';
+import { noteType, noteActions } from '../store';
+import { useDispatch } from 'react-redux';
 
 const NotePad: React.FC<{
   note: noteType;
+  idx: number;
 }> = props => {
-  const [coord, setCoord] = useState(props.note.coord);
-  const [size, setSize] = useState(props.note.size);
+  const dispatch = useDispatch();
   const W = document.querySelector('.pad')!.clientWidth;
   const H = document.querySelector('.pad')!.clientHeight;
   const padding = 20;
@@ -13,28 +13,23 @@ const NotePad: React.FC<{
   const mouseDownNote = (e: any) => {
     const startX: number = e.clientX;
     const startY: number = e.clientY;
-    const w = document.querySelector('.note')!.clientWidth;
-    const h = document.querySelector('.note')!.clientHeight;
-
-    setSize({ w: w, h: h });
 
     const moveNote = (e: MouseEvent): void => {
-      let x: number = coord.x + (e.clientX - startX);
-      let y: number = coord.y + (e.clientY - startY);
+      let x: number = props.note.coord.x + (e.clientX - startX);
+      let y: number = props.note.coord.y + (e.clientY - startY);
 
       x <= padding && (x = padding);
       y <= padding && (y = padding);
 
-      let r = x + w;
-      let b = y + h;
+      let r = x + props.note.size.w;
+      let b = y + props.note.size.h;
 
-      W - padding < r && (x = W - padding - w);
-      H - padding < b && (y = H - padding - h);
+      W - padding < r && (x = W - padding - props.note.size.w);
+      H - padding < b && (y = H - padding - props.note.size.h);
 
-      setCoord({
-        x: x,
-        y: y,
-      });
+      dispatch(
+        noteActions.moveNote({ id: props.note.id, coord: { x: x, y: y } })
+      );
     };
 
     const mouseUpNote = (): void => {
@@ -46,20 +41,44 @@ const NotePad: React.FC<{
     window.addEventListener('mouseup', mouseUpNote);
   };
 
+  const mouseDownSize = () => {
+    const changeSize = () => {
+      dispatch(noteActions.reSizeNote(props.note.id));
+    };
+
+    const mouseUpSize = (): void => {
+      window.removeEventListener('mousemove', changeSize);
+      window.removeEventListener('mouseup', mouseUpSize);
+    };
+
+    window.addEventListener('mousemove', changeSize);
+    window.addEventListener('mouseup', mouseUpSize);
+  };
+
+  const removeNoteHandler = () => {
+    dispatch(noteActions.removeNote(props.note.id));
+  };
+
+  const minimizeHandler = () => {
+    dispatch(noteActions.minimize(props.note.id));
+  };
+
   return (
     <div
-      className="note"
+      className={`note note${props.note.id}`}
       style={{
-        top: coord.y,
-        left: coord.x,
-        width: size.w,
-        height: size.h,
-        maxWidth: W - coord.x - padding,
-        maxHeight: H - coord.y - padding,
-      }}>
+        top: props.note.coord.y,
+        left: props.note.coord.x,
+        width: props.note.size.w,
+        height: props.note.size.h,
+        maxWidth: W - props.note.coord.x - padding,
+        maxHeight: H - props.note.coord.y - padding,
+        display: props.note.display,
+      }}
+      onMouseDown={mouseDownSize}>
       <div className="top_bar" onMouseDown={mouseDownNote}>
-        <div>-</div>
-        <div>x</div>
+        <div onClick={minimizeHandler}>-</div>
+        <div onClick={removeNoteHandler}>x</div>
       </div>
       <textarea>{props.note.text}</textarea>
     </div>
