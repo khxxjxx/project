@@ -4,7 +4,6 @@ import NotePad from './NotePad';
 
 const Pad = () => {
   const notes = useSelector((state: RootState) => state.note.note);
-  // const pad = useSelector((state: RootState) => state.note.pad);
 
   return (
     <div className="pad">

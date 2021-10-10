@@ -1,5 +1,6 @@
 import { noteType, noteActions } from '../store';
 import { useDispatch } from 'react-redux';
+import { ChangeEvent } from 'react';
 
 const NotePad: React.FC<{
   note: noteType;
@@ -10,7 +11,7 @@ const NotePad: React.FC<{
   const H = document.querySelector('.pad')!.clientHeight;
   const padding = 20;
 
-  const mouseDownNote = (e: any) => {
+  const mouseDownNote = (e: React.MouseEvent<HTMLDivElement>): void => {
     const startX: number = e.clientX;
     const startY: number = e.clientY;
 
@@ -63,6 +64,10 @@ const NotePad: React.FC<{
     dispatch(noteActions.minimize(props.note.id));
   };
 
+  const onChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
+    dispatch(noteActions.addText({ id: props.note.id, text: e.target.value }));
+  };
+
   return (
     <div
       className={`note note${props.note.id}`}
@@ -80,7 +85,7 @@ const NotePad: React.FC<{
         <div onClick={minimizeHandler}>-</div>
         <div onClick={removeNoteHandler}>x</div>
       </div>
-      <textarea>{props.note.text}</textarea>
+      <textarea onChange={onChange}>{props.note.text}</textarea>
     </div>
   );
 };

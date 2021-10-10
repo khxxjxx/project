@@ -11,12 +11,10 @@ export type noteType = {
 
 type stateType = {
   note: noteType[];
-  pad: noteType[];
 };
 
 const initialState: stateType = {
   note: [],
-  pad: [],
 };
 
 export const noteSlice = createSlice({
@@ -34,19 +32,18 @@ export const noteSlice = createSlice({
       };
 
       state.note.push(newNote);
-      state.pad.push(newNote);
     },
     removeNote: (state, action: PayloadAction<number>) => {
       state.note = state.note.filter(note => note.id !== action.payload);
     },
-    clickNote: (state, action: PayloadAction<number>) => {
-      console.log(action.payload);
-      const findIdx = state.pad.findIndex(note => note.id === action.payload);
-      console.log(findIdx);
-      const copyNote = state.pad[findIdx];
-      state.pad.splice(findIdx, 1);
-      state.pad.push(copyNote);
-    },
+    // clickNote: (state, action: PayloadAction<number>) => {
+    //   console.log(action.payload);
+    //   const findIdx = state.pad.findIndex(note => note.id === action.payload);
+    //   console.log(findIdx);
+    //   const copyNote = state.pad[findIdx];
+    //   state.pad.splice(findIdx, 1);
+    //   state.pad.push(copyNote);
+    // },
     moveNote: (
       state,
       action: PayloadAction<{ id: number; coord: { x: number; y: number } }>
@@ -69,6 +66,27 @@ export const noteSlice = createSlice({
     maximize: (state, action: PayloadAction<number>) => {
       state.note.find(note => note.id === action.payload)!.display =
         'inline-block';
+    },
+    addText: (state, action: PayloadAction<{ id: number; text: string }>) => {
+      const findNote = state.note.find(note => note.id === action.payload.id)!;
+      findNote.text = action.payload.text;
+      const enter = action.payload.text.indexOf('\n');
+
+      if (enter !== -1) {
+        if (action.payload.text.slice(0, enter).length < 11) {
+          findNote.title = action.payload.text.slice(0, enter);
+        } else {
+          findNote.title = action.payload.text.slice(0, 10) + '...';
+        }
+      } else {
+        if (action.payload.text === '') {
+          findNote.title = '새로운 노트';
+        } else if (action.payload.text.length < 11) {
+          findNote.title = action.payload.text.slice(0, 10);
+        } else {
+          findNote.title = action.payload.text.slice(0, 10) + '...';
+        }
+      }
     },
   },
 });
