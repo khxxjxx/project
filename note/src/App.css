@@ -13,7 +13,9 @@
 }
 
 .pad {
+  position: relative;
   margin: 30px;
+  padding: 20px;
   border: 1px solid #8f8f8f;
   border-radius: 30px;
   flex-grow: 1;
@@ -56,4 +58,40 @@
   background-color: #cecece;
   margin: 30px auto;
   vertical-align: middle;
+}
+
+.note {
+  display: inline-block;
+  position: absolute;
+  min-width: 120px;
+  min-height: 100px;
+  background-color: #f1abab;
+  border: 1px solid #8f8f8f;
+  resize: both;
+  overflow: auto;
+}
+
+.top_bar {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  background-color: lightcoral;
+}
+
+.top_bar div {
+  font-size: 20px;
+  margin: 0 8px 5px 5px;
+}
+
+textarea {
+  display: block;
+  border: none;
+  padding: 10px;
+  font-size: 18px;
+  background-color: transparent;
+  resize: none;
+}
+
+textarea:focus {
+  outline: none;
 }

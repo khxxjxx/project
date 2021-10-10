@@ -8,7 +8,7 @@ const Pad = () => {
   return (
     <div className="pad">
       {notes.map((note, idx) => (
-        <NotePad note={note} idx={idx} />
+        <NotePad note={note} key={idx} />
       ))}
     </div>
   );
