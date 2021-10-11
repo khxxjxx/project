@@ -43,6 +43,8 @@ const NotePad: React.FC<{
   };
 
   const mouseDownSize = () => {
+    dispatch(noteActions.clickNote(props.note.id));
+
     const changeSize = () => {
       dispatch(noteActions.reSizeNote(props.note.id));
     };
@@ -79,6 +81,7 @@ const NotePad: React.FC<{
         maxWidth: W - props.note.coord.x - padding,
         maxHeight: H - props.note.coord.y - padding,
         display: props.note.display,
+        zIndex: props.idx,
       }}
       onMouseDown={mouseDownSize}>
       <div className="top_bar" onMouseDown={mouseDownNote}>

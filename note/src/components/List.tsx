@@ -6,6 +6,7 @@ const List: React.FC<{ note: noteType }> = props => {
 
   const maximize = (e: any) => {
     dispatch(noteActions.maximize(props.note.id));
+    dispatch(noteActions.clickNote(props.note.id));
   };
 
   return <li onClick={maximize}>{props.note.title}</li>;

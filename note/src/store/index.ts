@@ -11,10 +11,12 @@ export type noteType = {
 
 type stateType = {
   note: noteType[];
+  index: number[];
 };
 
 const initialState: stateType = {
   note: [],
+  index: [],
 };
 
 export const noteSlice = createSlice({
@@ -32,18 +34,16 @@ export const noteSlice = createSlice({
       };
 
       state.note.push(newNote);
+      state.index.push(newNote.id);
     },
     removeNote: (state, action: PayloadAction<number>) => {
       state.note = state.note.filter(note => note.id !== action.payload);
     },
-    // clickNote: (state, action: PayloadAction<number>) => {
-    //   console.log(action.payload);
-    //   const findIdx = state.pad.findIndex(note => note.id === action.payload);
-    //   console.log(findIdx);
-    //   const copyNote = state.pad[findIdx];
-    //   state.pad.splice(findIdx, 1);
-    //   state.pad.push(copyNote);
-    // },
+    clickNote: (state, action: PayloadAction<number>) => {
+      const findIdx = state.index.indexOf(action.payload);
+      state.index.splice(findIdx, 1);
+      state.index.push(action.payload);
+    },
     moveNote: (
       state,
       action: PayloadAction<{ id: number; coord: { x: number; y: number } }>
