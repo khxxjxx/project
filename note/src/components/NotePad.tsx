@@ -78,8 +78,8 @@ const NotePad: React.FC<{
         left: props.note.coord.x,
         width: props.note.size.w,
         height: props.note.size.h,
-        maxWidth: W! - props.note.coord.x - padding,
-        maxHeight: H! - props.note.coord.y - padding,
+        maxWidth: W && W! - props.note.coord.x - padding,
+        maxHeight: H && H! - props.note.coord.y - padding,
         display: props.note.display,
         zIndex: props.idx,
       }}
