@@ -6,7 +6,7 @@
 .main {
   display: flex;
   flex-direction: column;
-  flex-basis: 20%;
+  flex-basis: 220px;
   margin: 30px;
   border-radius: 30px;
   border: 1px solid #8f8f8f;
@@ -48,6 +48,8 @@
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
+  cursor: pointer;
+  height: 20px;
 }
 
 .add {
@@ -61,7 +63,6 @@
 }
 
 .note {
-  display: inline-block;
   position: absolute;
   min-width: 120px;
   min-height: 100px;
@@ -76,11 +77,12 @@
   display: flex;
   justify-content: flex-end;
   background-color: lightcoral;
+  height: 30px;
 }
 
 .top_bar div {
   font-size: 20px;
-  margin: 0 8px 5px 5px;
+  margin: 2px 8px 0 5px;
 }
 
 textarea {
@@ -88,6 +90,8 @@ textarea {
   border: none;
   padding: 10px;
   font-size: 18px;
+  width: calc(100% - 20px);
+  height: calc(100% - 50px);
   background-color: transparent;
   resize: none;
 }
