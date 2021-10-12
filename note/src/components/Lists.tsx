@@ -4,7 +4,7 @@ import { RootState } from '../store/store';
 import List from './List';
 
 function Lists() {
-  const notes = useSelector((state: RootState) => state.note.note);
+  const notes = useSelector((state: RootState) => state.note);
   const dispatch = useDispatch();
 
   const addNote = () => {

@@ -7,8 +7,8 @@ const NotePad: React.FC<{
   idx: number;
 }> = props => {
   const dispatch = useDispatch();
-  const W = document.querySelector('.pad')!.clientWidth;
-  const H = document.querySelector('.pad')!.clientHeight;
+  const W = document.querySelector('.pad')?.clientWidth;
+  const H = document.querySelector('.pad')?.clientHeight;
   const padding = 20;
 
   const mouseDownNote = (e: React.MouseEvent<HTMLDivElement>): void => {
@@ -25,8 +25,8 @@ const NotePad: React.FC<{
       let r = x + props.note.size.w;
       let b = y + props.note.size.h;
 
-      W - padding < r && (x = W - padding - props.note.size.w);
-      H - padding < b && (y = H - padding - props.note.size.h);
+      W! - padding < r && (x = W! - padding - props.note.size.w);
+      H! - padding < b && (y = H! - padding - props.note.size.h);
 
       dispatch(
         noteActions.moveNote({ id: props.note.id, coord: { x: x, y: y } })
@@ -78,8 +78,8 @@ const NotePad: React.FC<{
         left: props.note.coord.x,
         width: props.note.size.w,
         height: props.note.size.h,
-        maxWidth: W - props.note.coord.x - padding,
-        maxHeight: H - props.note.coord.y - padding,
+        maxWidth: W! - props.note.coord.x - padding,
+        maxHeight: H! - props.note.coord.y - padding,
         display: props.note.display,
         zIndex: props.idx,
       }}

@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 export type noteType = {
   id: number;
@@ -38,6 +40,7 @@ export const noteSlice = createSlice({
     },
     removeNote: (state, action: PayloadAction<number>) => {
       state.note = state.note.filter(note => note.id !== action.payload);
+      state.index = state.index.filter(idx => idx !== action.payload);
     },
     clickNote: (state, action: PayloadAction<number>) => {
       const findIdx = state.index.indexOf(action.payload);
@@ -91,6 +94,11 @@ export const noteSlice = createSlice({
   },
 });
 
+export const persistConfig = {
+  key: 'root',
+  storage,
+};
+
 export const noteActions = noteSlice.actions;
 
-export default noteSlice.reducer;
+export default persistReducer(persistConfig, noteSlice.reducer);

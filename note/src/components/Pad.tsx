@@ -3,8 +3,8 @@ import { RootState } from '../store/store';
 import NotePad from './NotePad';
 
 const Pad = () => {
-  const notes = useSelector((state: RootState) => state.note.note);
-  const index = useSelector((state: RootState) => state.note.index);
+  const notes = useSelector((state: RootState) => state.note);
+  const index = useSelector((state: RootState) => state.index);
 
   return (
     <div className="pad">
