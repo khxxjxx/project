@@ -1,6 +1,8 @@
 import { noteType, noteActions } from '../store';
 import { useDispatch } from 'react-redux';
 import { ChangeEvent } from 'react';
+import { color } from '../store';
+import NoteColor from './NoteColor';
 
 const NotePad: React.FC<{
   note: noteType;
@@ -99,12 +101,9 @@ const NotePad: React.FC<{
           style={{ backgroundColor: props.note.color.b }}>
           <div style={{ display: props.note.toggle ? 'block' : 'none' }}>
             <ul style={{ backgroundColor: props.note.color.t }}>
-              <li>yellow</li>
-              <li>blue</li>
-              <li>green</li>
-              <li>pink</li>
-              <li>purple</li>
-              <li>gray</li>
+              {Object.keys(color).map((color, idx) => (
+                <NoteColor key={idx} color={color} id={props.note.id} />
+              ))}
             </ul>
           </div>
         </div>

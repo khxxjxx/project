@@ -2,7 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-export const color = {
+type colorTyps = { [k: string]: { t: string; b: string } };
+
+export const color: colorTyps = {
   yellow: { t: '#fff174', b: '#faf1a0' },
   blue: { t: '#85b0ff', b: '#b4ceff' },
   green: { t: '#baff74', b: '#d3ffa7' },
@@ -45,7 +47,7 @@ export const noteSlice = createSlice({
         size: { w: 200, h: 180 },
         display: 'inline-block',
         toggle: false,
-        color: color.pink,
+        color: color['pink'],
       };
 
       state.note.push(newNote);
@@ -107,6 +109,13 @@ export const noteSlice = createSlice({
     toggle: (state, action: PayloadAction<number>) => {
       const findNote = state.note.find(note => note.id === action.payload);
       findNote!.toggle = !findNote!.toggle;
+    },
+    colorChange: (
+      state,
+      action: PayloadAction<{ id: number; color: string }>
+    ) => {
+      state.note.find(note => note.id === action.payload.id)!.color =
+        color[action.payload.color];
     },
   },
 });
