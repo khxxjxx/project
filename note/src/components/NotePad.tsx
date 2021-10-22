@@ -70,6 +70,10 @@ const NotePad: React.FC<{
     dispatch(noteActions.addText({ id: props.note.id, text: e.target.value }));
   };
 
+  const onToggle = (): void => {
+    dispatch(noteActions.toggle(props.note.id));
+  };
+
   return (
     <div
       className={`note note${props.note.id}`}
@@ -85,8 +89,22 @@ const NotePad: React.FC<{
       }}
       onMouseDown={mouseDownSize}>
       <div className="top_bar" onMouseDown={mouseDownNote}>
-        <div onClick={minimizeHandler}>-</div>
-        <div onClick={removeNoteHandler}>x</div>
+        <div className="color" onClick={onToggle}>
+          <div style={{ display: props.note.toggle ? 'block' : 'none' }}>
+            <ul>
+              <li>yellow</li>
+              <li>blue</li>
+              <li>green</li>
+              <li>pink</li>
+              <li>purple</li>
+              <li>gray</li>
+            </ul>
+          </div>
+        </div>
+        <div className="top_btn">
+          <div onClick={minimizeHandler}>-</div>
+          <div onClick={removeNoteHandler}>x</div>
+        </div>
       </div>
       <textarea onChange={onChange}>{props.note.text}</textarea>
     </div>

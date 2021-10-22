@@ -37,8 +37,11 @@
   overflow: scroll;
 }
 
-.list {
+li {
   list-style: none;
+}
+
+.list {
   padding: 0;
   margin: 0;
 }
@@ -75,14 +78,47 @@
 .top_bar {
   cursor: pointer;
   display: flex;
-  justify-content: flex-end;
   background-color: lightcoral;
   height: 30px;
 }
 
-.top_bar div {
+.top_btn {
+  display: flex;
+  margin-left: auto;
+}
+
+.top_btn div {
   font-size: 20px;
   margin: 2px 8px 0 5px;
+}
+
+.color {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #4e4e4e;
+  background-color: #f1abab;
+  margin: auto 8px;
+}
+
+.color div {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 22px;
+  left: -5px;
+}
+
+.color ul {
+  margin: 0;
+  padding: 0;
+  background: #ffffff34;
+  width: 60px;
+}
+
+.color li {
+  font-size: 13px;
+  padding: 2px 0 2px 5px;
 }
 
 textarea {

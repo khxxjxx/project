@@ -9,6 +9,7 @@ export type noteType = {
   coord: { x: number; y: number };
   size: { w: number; h: number };
   display: string;
+  toggle: boolean;
 };
 
 type stateType = {
@@ -33,6 +34,7 @@ export const noteSlice = createSlice({
         coord: { x: 50, y: 50 },
         size: { w: 200, h: 180 },
         display: 'inline-block',
+        toggle: false,
       };
 
       state.note.push(newNote);
@@ -90,6 +92,10 @@ export const noteSlice = createSlice({
           findNote.title = action.payload.text.slice(0, 10) + '...';
         }
       }
+    },
+    toggle: (state, action: PayloadAction<number>) => {
+      const findNote = state.note.find(note => note.id === action.payload);
+      findNote!.toggle = !findNote!.toggle;
     },
   },
 });
