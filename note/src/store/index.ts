@@ -2,6 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
+export const color = {
+  yellow: { t: '#fff174', b: '#faf1a0' },
+  blue: { t: '#85b0ff', b: '#b4ceff' },
+  green: { t: '#baff74', b: '#d3ffa7' },
+  pink: { t: '#f08080', b: '#f1abab' },
+  purple: { t: '#cd97ff', b: '#debcfd' },
+  gray: { t: '#aaaaaa', b: '#cacaca' },
+};
+
 export type noteType = {
   id: number;
   title: string;
@@ -10,6 +19,7 @@ export type noteType = {
   size: { w: number; h: number };
   display: string;
   toggle: boolean;
+  color: { t: string; b: string };
 };
 
 type stateType = {
@@ -35,6 +45,7 @@ export const noteSlice = createSlice({
         size: { w: 200, h: 180 },
         display: 'inline-block',
         toggle: false,
+        color: color.pink,
       };
 
       state.note.push(newNote);

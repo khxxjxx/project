@@ -9,7 +9,11 @@ const List: React.FC<{ note: noteType }> = props => {
     dispatch(noteActions.clickNote(props.note.id));
   };
 
-  return <li onClick={maximize}>{props.note.title}</li>;
+  return (
+    <li onClick={maximize} style={{ backgroundColor: props.note.color.t }}>
+      {props.note.title}
+    </li>
+  );
 };
 
 export default List;

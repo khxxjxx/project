@@ -47,7 +47,6 @@ li {
 }
 
 .list li {
-  background-color: lightcoral;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
@@ -69,7 +68,6 @@ li {
   position: absolute;
   min-width: 120px;
   min-height: 100px;
-  background-color: #f1abab;
   border: 1px solid #8f8f8f;
   resize: both;
   overflow: auto;
@@ -78,7 +76,6 @@ li {
 .top_bar {
   cursor: pointer;
   display: flex;
-  background-color: lightcoral;
   height: 30px;
 }
 
@@ -97,7 +94,6 @@ li {
   width: 15px;
   height: 15px;
   border: 1px solid #4e4e4e;
-  background-color: #f1abab;
   margin: auto 8px;
 }
 
@@ -106,19 +102,19 @@ li {
   width: 100px;
   height: 100px;
   top: 22px;
-  left: -5px;
+  left: -10px;
 }
 
 .color ul {
   margin: 0;
   padding: 0;
-  background: #ffffff34;
   width: 60px;
+  height: 125px;
 }
 
 .color li {
   font-size: 13px;
-  padding: 2px 0 2px 5px;
+  padding: 2px 0 2px 10px;
 }
 
 textarea {

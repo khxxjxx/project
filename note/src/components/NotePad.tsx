@@ -86,12 +86,19 @@ const NotePad: React.FC<{
         maxHeight: H && H! - props.note.coord.y - padding,
         display: props.note.display,
         zIndex: props.idx,
+        backgroundColor: props.note.color.b,
       }}
       onMouseDown={mouseDownSize}>
-      <div className="top_bar" onMouseDown={mouseDownNote}>
-        <div className="color" onClick={onToggle}>
+      <div
+        className="top_bar"
+        onMouseDown={mouseDownNote}
+        style={{ backgroundColor: props.note.color.t }}>
+        <div
+          className="color"
+          onClick={onToggle}
+          style={{ backgroundColor: props.note.color.b }}>
           <div style={{ display: props.note.toggle ? 'block' : 'none' }}>
-            <ul>
+            <ul style={{ backgroundColor: props.note.color.t }}>
               <li>yellow</li>
               <li>blue</li>
               <li>green</li>
